@@ -13,6 +13,7 @@ export function createI18n(options?: VueI18n.I18nOptions): VueI18n {
 
 export interface Composer {
   locale: WritableComputedRef<string>
+  availableLocales: ComputedRef<string[]>
   t: typeof VueI18n.prototype.t
   tc: typeof VueI18n.prototype.tc
   te: typeof VueI18n.prototype.te
@@ -40,8 +41,15 @@ export function useI18n(): Composer {
     }
   })
 
+  const availableLocales = computed({
+    get() {
+      return i18n.availableLocales
+    },
+  })
+
   return {
     locale,
+    availableLocales: vm.$i18n.availableLocales
     t: vm.$t.bind(vm),
     tc: vm.$tc.bind(vm),
     d: vm.$d.bind(vm),
