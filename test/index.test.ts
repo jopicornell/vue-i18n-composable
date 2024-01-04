@@ -25,6 +25,7 @@ test('createI18n', () => {
     }
   })
   expect(i18n.locale).toBe('en')
+  expect(i18n.availableLocales).toEqual(['en', 'ja'])
   expect(i18n.fallbackLocale).toBe('en')
   expect(i18n.t('hello')).toBe('Hello')
 })
