@@ -1,4 +1,4 @@
-import Vue, { computed, getCurrentInstance } from 'vue'
+import Vue, { computed, ComputedRef, getCurrentInstance } from 'vue'
 import type { WritableComputedRef } from 'vue'
 import VueI18n from 'vue-i18n'
 import { VueConstructor } from 'vue/types/umd'
@@ -41,15 +41,13 @@ export function useI18n(): Composer {
     }
   })
 
-  const availableLocales = computed({
-    get() {
-      return i18n.availableLocales
-    },
+  const availableLocales = computed(() => {
+    return i18n.availableLocales
   })
 
   return {
     locale,
-    availableLocales: vm.$i18n.availableLocales
+    availableLocales,
     t: vm.$t.bind(vm),
     tc: vm.$tc.bind(vm),
     d: vm.$d.bind(vm),

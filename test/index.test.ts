@@ -46,13 +46,13 @@ test('useI18n', async () => {
     {
       template: `<p>{{ t('hello') }}</p>`,
       setup() {
-        const { t } = useI18n()
-        return { t }
+        const { t, availableLocales } = useI18n()
+        return { t, availableLocales }
       }
     },
     { localVue, i18n }
   )
-
   await nextTick()
+  expect(wrapper.vm.availableLocales).toEqual(['en', 'ja'])
   expect(wrapper.text()).toEqual('Hello')
 })
